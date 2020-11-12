@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: siteazureexperts 
 spec:
-  replicas: 1
+  replicas: 5
   selector:
     matchLabels:
       app: siteazureexperts
@@ -15,5 +15,8 @@ spec:
       containers:
         - name: siteazureexperts 
           image: groffeazuredevops.azurecr.io/siteazureexperts
+          env:
+            - name: ApplicationInsights__InstrumentationKey
+              value: 77d6cba1-31d7-4d54-b3a5-bb56e146a897
           ports:
           - containerPort: 80
