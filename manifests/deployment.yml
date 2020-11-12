@@ -1,0 +1,19 @@
+apiVersion : apps/v1
+kind: Deployment
+metadata:
+  name: siteazureexperts 
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: siteazureexperts
+  template:
+    metadata:
+      labels:
+        app: siteazureexperts 
+    spec:
+      containers:
+        - name: siteazureexperts 
+          image: groffeazuredevops.azurecr.io/siteazureexperts
+          ports:
+          - containerPort: 80
