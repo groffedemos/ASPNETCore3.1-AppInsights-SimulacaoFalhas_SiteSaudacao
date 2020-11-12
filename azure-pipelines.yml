@@ -15,10 +15,18 @@ variables:
 steps:
 - task: DotNetCoreCLI@2
   inputs:
-    command: 'build'
-    projects: '**/SiteContagem.csproj'
+    command: 'publish'
+    publishWebProjects: true
 - task: PublishBuildArtifacts@1
   inputs:
     PathtoPublish: '$(Build.ArtifactStagingDirectory)'
     ArtifactName: 'groffesitecontagem'
     publishLocation: 'Container'
+- task: AzureRmWebAppDeployment@4
+  inputs:
+    ConnectionType: 'AzureRM'
+    azureSubscription: 'Microsoft Azure Sponsorship (f3e7d90b-efba-4481-ac3d-d8df26b6235d)'
+    appType: 'webAppLinux'
+    WebAppName: 'groffesitecontagem'
+    packageForLinux: '$(System.DefaultWorkingDirectory)/**/*.zip'
+    RuntimeStack: 'DOTNETCORE|3.1'
